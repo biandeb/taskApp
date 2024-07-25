@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import ButtonPrimary from './src/components/ButtonPrimary';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hola Bianca!</Text>
-      <StatusBar style="light" />
+      <View style={styles.container}>
+    <Text style={styles.title}> Lista de tareas
+    </Text>
+      <View style={styles.containerInput}>
+    <TextInput style={styles.input} placeholder='Ingrese una tarea'
+    />
+    <ButtonPrimary text="Agregar"/>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#087877',
+  container:{
+    marginTop:60,
+    flex:1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
+  title:{
+    fontSize: 28,
+    color: '#00556d',
+  },
+  containerInput:{
+    flexDirection:"row",
+    padding:10
+  },
+  input:{
+    borderColor:"black",
+    borderWidth:1,
+    padding:5,
+    paddingStart:15,
+    flex:2,
+    margin:10,
+    borderRadius:5
+  },
+  containerTitle:{
+    width:"100%",
+    flexDirection:"row"
+  }
 });
