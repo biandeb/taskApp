@@ -6,6 +6,8 @@ import ButtonPrimary from './src/components/ButtonPrimary.js';
 import CardTask from './src/components/CardTask.js';
 import ModalPrimary from './src/components/ModalPrimary.js';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 export default function App() {
   const [taskName,setTaskName] = useState("")
     const [tasks, setTasks] = useState([])
@@ -22,7 +24,7 @@ export default function App() {
       }
       setTasks([...tasks,newTask])
       setTaskName("")
-      setVisibleModal()
+      handleVisibleModal()
     }
 
   return (
@@ -37,7 +39,9 @@ export default function App() {
     value={taskName}
     onChangeText={setTaskName}
     />
-    <ButtonPrimary onPress={handleVisibleModal} text="Agregar"/>
+    <ButtonPrimary onPress={handleVisibleModal} text="Agregar">
+    <Ionicons name="add-circle-outline" size={24} color="white" />
+      </ButtonPrimary> 
       </View>
       <FlatList
       data={tasks}
