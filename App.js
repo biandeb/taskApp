@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import ButtonPrimary from './src/components/ButtonPrimary';
+import CardTask from './src/components/CardTask';
 
 export default function App() {
   return (
@@ -10,6 +11,9 @@ export default function App() {
     <TextInput style={styles.input} placeholder='Ingrese una tarea'
     />
     <ButtonPrimary text="Agregar"/>
+      </View>
+      <View>
+        {tasks.map(task => <CardTask task={task}/>)}
       </View>
     </View>
   );
