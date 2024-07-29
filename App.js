@@ -4,15 +4,17 @@ import uuid from 'react-native-uuid'
 
 import ButtonPrimary from './src/components/ButtonPrimary.js';
 import CardTask from './src/components/CardTask.js';
+import ModalPrimary from './src/components/ModalPrimary.js';
 
 export default function App() {
   const [taskName,setTaskName] = useState("")
     const [tasks, setTasks] = useState([])
-    // const [visibleModal,setVisibleModal] = useState(false)
+    const [visibleModal,setVisibleModal] = useState(false)
 
-    // const handleVisibleModal = () => {
-    //   setVisibleModal(!visibleModal)
-    // }
+    const handleVisibleModal = () => {
+      setVisibleModal(!visibleModal)
+    }
+
     const handleAddTask = () => {
       const newTask = {
         id:uuid.v4(),
@@ -20,10 +22,11 @@ export default function App() {
       }
       setTasks([...tasks,newTask])
       setTaskName("")
-      // handleVisibleModal()
+      setVisibleModal()
     }
 
   return (
+    <>
       <View style={styles.container}>
     <Text style={styles.title}> Lista de tareas
     </Text>
@@ -34,7 +37,7 @@ export default function App() {
     value={taskName}
     onChangeText={setTaskName}
     />
-    <ButtonPrimary onPress={handleAddTask} text="Agregar"/>
+    <ButtonPrimary onPress={handleVisibleModal} text="Agregar"/>
       </View>
       <FlatList
       data={tasks}
@@ -42,6 +45,13 @@ export default function App() {
       renderItem={({item}) => <CardTask task={item} />}
       />
     </View>
+    <ModalPrimary 
+    text={'¿Desea agregar una tarea?'}
+    visible={visibleModal}
+    handleVisibleModal={handleVisibleModal}
+    handleModal = {handleAddTask}
+    />
+    </>
   );
 }
 
