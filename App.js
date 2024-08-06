@@ -1,9 +1,9 @@
-import { FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useState } from "react";
 import uuid from "react-native-uuid";
 
+import TasksListContainer from './src/components/TasksListContainer'
 import ButtonPrimary from "./src/components/ButtonPrimary.js";
-import CardTask from "./src/components/CardTask.js";
 import ModalPrimary from "./src/components/ModalPrimary.js";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -46,13 +46,11 @@ export default function App() {
             <Ionicons name="add-circle-outline" size={24} color="white" />
           </ButtonPrimary>
         </View>
-        <FlatList
-          data={tasks}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <CardTask task={item} handleDeleteTask={handleDeleteTask} />
-          )}
+        <TasksListContainer
+        tasks={tasks}
+        handleDeleteTask={handleDeleteTask}
         />
+
       </View>
       <ModalPrimary
         text={"¿Desea agregar una tarea?"}

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import ButtonPrimary from './ButtonPrimary'
+import ButtonPrimary from '../ButtonPrimary'
 
 const CardTask = ({task, handleDeleteTask}) => {
   return (
