@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import ButtonPrimary from './ButtonPrimary'
 
-const CardTask = ({task}) => {
+const CardTask = ({task, handleDeleteTask}) => {
   return (
     <View style={styles.container} key={task.id}>
         <Text style={styles.text}>ID: {task.id}</Text>
         <Text style={styles.text}>Nombre: {task.name}</Text>
+        <ButtonPrimary text='Borrar' onPress={() => handleDeleteTask(task.id)} />
     </View>
   )
 }
