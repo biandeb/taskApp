@@ -1,17 +1,20 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
+
 import uuid from "react-native-uuid";
 
-import TasksListContainer from './src/components/TasksListContainer'
-import ButtonPrimary from "./src/components/ButtonPrimary.js";
+import TasksListContainer from "./src/components/TasksListContainer";
 import ModalPrimary from "./src/components/ModalPrimary.js";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
+import ContainerInput from "./src/components/ContainerInput.js";
 
 export default function App() {
   const [taskName, setTaskName] = useState("");
   const [tasks, setTasks] = useState([]);
   const [visibleModal, setVisibleModal] = useState(false);
+
+  const handleTasksName = (t) => {
+    setTaskName(t);
+  };
 
   const handleVisibleModal = () => {
     setVisibleModal(!visibleModal);
@@ -28,29 +31,19 @@ export default function App() {
   };
 
   const handleDeleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id))
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.title}> Lista de tareas</Text>
-        <View style={styles.containerInput}>
-          <TextInput
-            style={styles.input}
-            placeholder="Ingrese una tarea"
-            value={taskName}
-            onChangeText={setTaskName}
-          />
-          <ButtonPrimary onPress={handleVisibleModal} text="Agregar">
-            <Ionicons name="add-circle-outline" size={24} color="white" />
-          </ButtonPrimary>
-        </View>
-        <TasksListContainer
-        tasks={tasks}
-        handleDeleteTask={handleDeleteTask}
+        <ContainerInput
+          taskName={taskName}
+          handleVisibleModal={handleVisibleModal}
+          handleTasksName={handleTasksName}
         />
-
+        <TasksListContainer tasks={tasks} handleDeleteTask={handleDeleteTask} />
       </View>
       <ModalPrimary
         text={"¿Desea agregar una tarea?"}
@@ -71,19 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: "#00556d",
     marginHorizontal: "25%",
-  },
-  containerInput: {
-    flexDirection: "row",
-    padding: 10,
-  },
-  input: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 5,
-    paddingStart: 15,
-    flex: 2,
-    margin: 10,
-    borderRadius: 5,
   },
   containerTitle: {
     width: "100%",
