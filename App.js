@@ -10,14 +10,22 @@ import ContainerInput from "./src/components/ContainerInput.js";
 export default function App() {
   const [taskName, setTaskName] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [visibleModal, setVisibleModal] = useState(false);
+  const [visibleAddTaskModal, setVisibleAddTaskModal] = useState(false);
+
+  const [visibleDeleteTaskModal, setVisibleDeleteTaskModal] = useState(false);
+  const [idTaskDelete, setIdTaskDelete] = useState('')
 
   const handleTasksName = (t) => {
     setTaskName(t);
   };
 
-  const handleVisibleModal = () => {
-    setVisibleModal(!visibleModal);
+  const handleVisibleAddTaskModal = () => {
+    setVisibleAddTaskModal(!visibleAddTaskModal);
+  };
+
+  const handleVisibleDeleteTaskModal = (id='') => {
+    setIdTaskDelete(id);
+    setVisibleDeleteTaskModal(!visibleDeleteTaskModal);
   };
 
   const handleAddTask = () => {
@@ -27,11 +35,12 @@ export default function App() {
     };
     setTasks([...tasks, newTask]);
     setTaskName("");
-    handleVisibleModal();
+    handleVisibleAddTaskModal();
   };
 
   const handleDeleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks(tasks.filter(task => task.id !== id));
+    handleVisibleDeleteTaskModal();
   };
 
   return (
@@ -40,16 +49,25 @@ export default function App() {
         <Text style={styles.title}> Lista de tareas</Text>
         <ContainerInput
           taskName={taskName}
-          handleVisibleModal={handleVisibleModal}
+          handleVisibleModal={handleVisibleAddTaskModal}
           handleTasksName={handleTasksName}
         />
-        <TasksListContainer tasks={tasks} handleDeleteTask={handleDeleteTask} />
+        <TasksListContainer 
+        tasks={tasks} 
+        handleVisibleModal={handleVisibleDeleteTaskModal} 
+        />
       </View>
       <ModalPrimary
         text={"¿Desea agregar una tarea?"}
-        visible={visibleModal}
-        handleVisibleModal={handleVisibleModal}
+        visible={visibleAddTaskModal}
+        handleVisibleModal={handleVisibleAddTaskModal}
         handleModal={handleAddTask}
+      />
+      <ModalPrimary
+        text={"¿Desea borrar la tarea?"}
+        visible={visibleDeleteTaskModal}
+        handleVisibleModal={handleVisibleDeleteTaskModal}
+        handleModal= {() => handleDeleteTask(idTaskDelete)}
       />
     </>
   );

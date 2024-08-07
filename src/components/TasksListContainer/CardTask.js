@@ -1,30 +1,40 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import ButtonPrimary from '../ButtonPrimary'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-const CardTask = ({task, handleDeleteTask}) => {
+import ButtonPrimary from "../ButtonPrimary";
+
+const CardTask = ({ task, handleVisibleModal }) => {
   return (
     <View style={styles.container} key={task.id}>
+      <View style={styles.textContainer}>
         <Text style={styles.text}>ID: {task.id}</Text>
         <Text style={styles.text}>Nombre: {task.name}</Text>
-        <ButtonPrimary text='Borrar' onPress={() => handleDeleteTask(task.id)} />
+      </View>
+      <ButtonPrimary 
+      style={{backgroundColor:'#273940'}}
+      text="Borrar" 
+      onPress={() => handleVisibleModal(task.id)} />
     </View>
-  )
-}
-export default CardTask
+  );
+};
+export default CardTask;
 
 const styles = StyleSheet.create({
-    container:{
-        width:'90%',
-        backgroundColor: '#3499b3',
-        marginHorizontal: '5%',
-        marginVertical: 8,
-        padding: 13,
-        borderRadius: 5
-    },
-    text:{
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 17,
-    }
-})
+  container: {
+    width: "90%",
+    backgroundColor: "#3499b3",
+    marginHorizontal: "5%",
+    marginVertical: 8,
+    padding: 13,
+    borderRadius: 5,
+  },
+  text: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+  textContainer: {
+    flexDirection: "column",
+    gap: 10,
+  },
+});
